@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Fee limits (§4 RAVO) live in two places that must stay in sync: `src/lib/fees.ts` (UI + tests) and the DB functions `ravo_max_fee` / `validate_service` (enforced on every insert/update). Why: the database is the source of truth, the UI only warns early.
+- App data is read/written with the browser client under owner-only RLS (`owner_id = auth.uid()`); signed-in pages live under `src/routes/_authenticated/` and wrap content in `AppShell`. Why: each lawyer may only see their own records (Anwaltsgeheimnis).
