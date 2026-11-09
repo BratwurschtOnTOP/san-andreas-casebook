@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { format, differenceInCalendarDays } from "date-fns";
@@ -131,7 +131,7 @@ function Dashboard() {
   );
 }
 
-function Notice({ children, tone = "warning" }: { children: React.ReactNode; tone?: "warning" | "danger" }) {
+function Notice({ children, tone = "warning" }: { children: ReactNode; tone?: "warning" | "danger" }) {
   return (
     <div
       className={`flex items-start gap-3 rounded-md border px-4 py-3 text-sm ${
@@ -144,7 +144,7 @@ function Notice({ children, tone = "warning" }: { children: React.ReactNode; ton
   );
 }
 
-function QuickLink({ to, icon, title, text }: { to: "/familienlizenz" | "/einsicht"; icon: React.ReactNode; title: string; text: string }) {
+function QuickLink({ to, icon, title, text }: { to: "/familienlizenz" | "/einsicht"; icon: ReactNode; title: string; text: string }) {
   return (
     <Link to={to} className="flex items-center gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-gold">
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">{icon}</div>

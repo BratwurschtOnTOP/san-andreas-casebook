@@ -14,9 +14,12 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEinsichtRouteImport } from './routes/_authenticated/einsicht'
 import { Route as AuthenticatedGebuehrenRouteImport } from './routes/_authenticated/gebuehren'
 import { Route as AuthenticatedLeistungenRouteImport } from './routes/_authenticated/leistungen'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
+import { Route as AuthenticatedFamilienlizenzIndexRouteImport } from './routes/_authenticated/familienlizenz.index'
+import { Route as AuthenticatedFamilienlizenzIdRouteImport } from './routes/_authenticated/familienlizenz.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -42,6 +45,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEinsichtRoute = AuthenticatedEinsichtRouteImport.update({
+  id: '/einsicht',
+  path: '/einsicht',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedGebuehrenRoute = AuthenticatedGebuehrenRouteImport.update({
   id: '/gebuehren',
   path: '/gebuehren',
@@ -57,24 +65,42 @@ const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFamilienlizenzIndexRoute =
+  AuthenticatedFamilienlizenzIndexRouteImport.update({
+    id: '/familienlizenz/',
+    path: '/familienlizenz/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedFamilienlizenzIdRoute =
+  AuthenticatedFamilienlizenzIdRouteImport.update({
+    id: '/familienlizenz/$id',
+    path: '/familienlizenz/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/einsicht': typeof AuthenticatedEinsichtRoute
   '/gebuehren': typeof AuthenticatedGebuehrenRoute
   '/leistungen': typeof AuthenticatedLeistungenRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/familienlizenz/$id': typeof AuthenticatedFamilienlizenzIdRoute
+  '/familienlizenz/': typeof AuthenticatedFamilienlizenzIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/einsicht': typeof AuthenticatedEinsichtRoute
   '/gebuehren': typeof AuthenticatedGebuehrenRoute
   '/leistungen': typeof AuthenticatedLeistungenRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/familienlizenz/$id': typeof AuthenticatedFamilienlizenzIdRoute
+  '/familienlizenz': typeof AuthenticatedFamilienlizenzIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -83,9 +109,12 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/einsicht': typeof AuthenticatedEinsichtRoute
   '/_authenticated/gebuehren': typeof AuthenticatedGebuehrenRoute
   '/_authenticated/leistungen': typeof AuthenticatedLeistungenRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
+  '/_authenticated/familienlizenz/$id': typeof AuthenticatedFamilienlizenzIdRoute
+  '/_authenticated/familienlizenz/': typeof AuthenticatedFamilienlizenzIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -94,18 +123,24 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/dashboard'
+    | '/einsicht'
     | '/gebuehren'
     | '/leistungen'
     | '/profil'
+    | '/familienlizenz/$id'
+    | '/familienlizenz/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
     | '/dashboard'
+    | '/einsicht'
     | '/gebuehren'
     | '/leistungen'
     | '/profil'
+    | '/familienlizenz/$id'
+    | '/familienlizenz'
   id:
     | '__root__'
     | '/'
@@ -113,9 +148,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/dashboard'
+    | '/_authenticated/einsicht'
     | '/_authenticated/gebuehren'
     | '/_authenticated/leistungen'
     | '/_authenticated/profil'
+    | '/_authenticated/familienlizenz/$id'
+    | '/_authenticated/familienlizenz/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -162,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/einsicht': {
+      id: '/_authenticated/einsicht'
+      path: '/einsicht'
+      fullPath: '/einsicht'
+      preLoaderRoute: typeof AuthenticatedEinsichtRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/gebuehren': {
       id: '/_authenticated/gebuehren'
       path: '/gebuehren'
@@ -183,21 +228,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfilRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/familienlizenz/': {
+      id: '/_authenticated/familienlizenz/'
+      path: '/familienlizenz'
+      fullPath: '/familienlizenz/'
+      preLoaderRoute: typeof AuthenticatedFamilienlizenzIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/familienlizenz/$id': {
+      id: '/_authenticated/familienlizenz/$id'
+      path: '/familienlizenz/$id'
+      fullPath: '/familienlizenz/$id'
+      preLoaderRoute: typeof AuthenticatedFamilienlizenzIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEinsichtRoute: typeof AuthenticatedEinsichtRoute
   AuthenticatedGebuehrenRoute: typeof AuthenticatedGebuehrenRoute
   AuthenticatedLeistungenRoute: typeof AuthenticatedLeistungenRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+  AuthenticatedFamilienlizenzIdRoute: typeof AuthenticatedFamilienlizenzIdRoute
+  AuthenticatedFamilienlizenzIndexRoute: typeof AuthenticatedFamilienlizenzIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEinsichtRoute: AuthenticatedEinsichtRoute,
   AuthenticatedGebuehrenRoute: AuthenticatedGebuehrenRoute,
   AuthenticatedLeistungenRoute: AuthenticatedLeistungenRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+  AuthenticatedFamilienlizenzIdRoute: AuthenticatedFamilienlizenzIdRoute,
+  AuthenticatedFamilienlizenzIndexRoute: AuthenticatedFamilienlizenzIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

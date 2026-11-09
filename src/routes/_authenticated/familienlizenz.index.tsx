@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_authenticated/familienlizenz/")({
   component: Familienlizenz,
 });
 
-export const STATUS_VARIANT = {
+const STATUS_VARIANT = {
   entwurf: "secondary",
   eingereicht: "outline",
   genehmigt: "default",
@@ -122,7 +122,7 @@ function NewApplicationDialog({ open, onOpenChange }: { open: boolean; onOpenCha
   const [sworn, setSworn] = useState(false);
   const [fee, setFee] = useState(String(limit));
   const [logService, setLogService] = useState(true);
-  const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value });
+  const set = (k: keyof typeof f) => (e: ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value });
 
   const docData = {
     ...f,
@@ -244,7 +244,7 @@ function NewApplicationDialog({ open, onOpenChange }: { open: boolean; onOpenCha
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label className="text-xs">{label}</Label>
