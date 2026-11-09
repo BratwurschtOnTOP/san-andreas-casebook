@@ -14,16 +14,187 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      family_applications: {
+        Row: {
+          applicant_name: string
+          applicant_passport: string
+          applicant_phone: string
+          application_date: string
+          client_signature: string
+          created_at: string
+          family_name: string
+          fee: number
+          house_number: string
+          id: string
+          lawyer_name: string
+          lawyer_passport: string
+          lawyer_phone: string
+          lawyer_signature: string
+          notes: string
+          owner_id: string
+          status: Database["public"]["Enums"]["application_status"]
+          sworn_statement: boolean
+          updated_at: string
+        }
+        Insert: {
+          applicant_name: string
+          applicant_passport: string
+          applicant_phone: string
+          application_date?: string
+          client_signature?: string
+          created_at?: string
+          family_name: string
+          fee?: number
+          house_number: string
+          id?: string
+          lawyer_name: string
+          lawyer_passport: string
+          lawyer_phone: string
+          lawyer_signature?: string
+          notes?: string
+          owner_id?: string
+          status?: Database["public"]["Enums"]["application_status"]
+          sworn_statement?: boolean
+          updated_at?: string
+        }
+        Update: {
+          applicant_name?: string
+          applicant_passport?: string
+          applicant_phone?: string
+          application_date?: string
+          client_signature?: string
+          created_at?: string
+          family_name?: string
+          fee?: number
+          house_number?: string
+          id?: string
+          lawyer_name?: string
+          lawyer_passport?: string
+          lawyer_phone?: string
+          lawyer_signature?: string
+          notes?: string
+          owner_id?: string
+          status?: Database["public"]["Enums"]["application_status"]
+          sworn_statement?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string
+          id: string
+          lawyer_type: Database["public"]["Enums"]["lawyer_type"]
+          license_valid_until: string | null
+          organization: string | null
+          passport_number: string
+          phone: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string
+          id: string
+          lawyer_type?: Database["public"]["Enums"]["lawyer_type"]
+          license_valid_until?: string | null
+          organization?: string | null
+          passport_number?: string
+          phone?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          id?: string
+          lawyer_type?: Database["public"]["Enums"]["lawyer_type"]
+          license_valid_until?: string | null
+          organization?: string | null
+          passport_number?: string
+          phone?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          client_name: string
+          client_phone: string
+          created_at: string
+          description: string
+          duration_minutes: number | null
+          family_application_id: string | null
+          fee: number
+          id: string
+          max_fee: number
+          owner_id: string
+          service_date: string
+          service_type: Database["public"]["Enums"]["service_type"]
+          updated_at: string
+        }
+        Insert: {
+          client_name: string
+          client_phone: string
+          created_at?: string
+          description?: string
+          duration_minutes?: number | null
+          family_application_id?: string | null
+          fee?: number
+          id?: string
+          max_fee?: number
+          owner_id?: string
+          service_date?: string
+          service_type: Database["public"]["Enums"]["service_type"]
+          updated_at?: string
+        }
+        Update: {
+          client_name?: string
+          client_phone?: string
+          created_at?: string
+          description?: string
+          duration_minutes?: number | null
+          family_application_id?: string | null
+          fee?: number
+          id?: string
+          max_fee?: number
+          owner_id?: string
+          service_date?: string
+          service_type?: Database["public"]["Enums"]["service_type"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_family_application_id_fkey"
+            columns: ["family_application_id"]
+            isOneToOne: false
+            referencedRelation: "family_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      ravo_max_fee: {
+        Args: {
+          _minutes: number
+          _type: Database["public"]["Enums"]["service_type"]
+        }
+        Returns: number
+      }
     }
     Enums: {
-      [_ in never]: never
+      application_status: "entwurf" | "eingereicht" | "genehmigt" | "abgelehnt"
+      lawyer_type: "rechtsanwalt" | "orgaanwalt"
+      service_type:
+        | "beratung"
+        | "verteidigung"
+        | "revisionsantrag"
+        | "familienantrag"
+        | "sonstiger_antrag"
+        | "schnellverfahren"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +321,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      application_status: ["entwurf", "eingereicht", "genehmigt", "abgelehnt"],
+      lawyer_type: ["rechtsanwalt", "orgaanwalt"],
+      service_type: [
+        "beratung",
+        "verteidigung",
+        "revisionsantrag",
+        "familienantrag",
+        "sonstiger_antrag",
+        "schnellverfahren",
+      ],
+    },
   },
 } as const
