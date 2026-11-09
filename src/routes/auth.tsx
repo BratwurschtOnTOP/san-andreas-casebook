@@ -54,7 +54,7 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(error.message === "Invalid login credentials" ? "E-Mail oder Passwort falsch" : error.message);
+    if (error) { toast.error(error.message === "Invalid login credentials" ? "E-Mail oder Passwort falsch" : error.message); return; }
     navigate({ to: "/dashboard", replace: true });
   }
 
@@ -67,23 +67,23 @@ function AuthPage() {
       options: { emailRedirectTo: window.location.origin + "/dashboard", data: { full_name: fullName } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     if (data.session) navigate({ to: "/dashboard", replace: true });
     else setConfirmSent(true);
   }
 
   async function forgot() {
-    if (!email) return toast.error("Bitte zuerst deine E-Mail eingeben");
+    if (!email) { toast.error("Bitte zuerst deine E-Mail eingeben"); return; }
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Link zum Zurücksetzen wurde gesendet");
   }
 
   async function oauth(provider: "google" | "lovable") {
     const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: window.location.origin });
-    if (result.error) return toast.error(result.error.message);
+    if (result.error) { toast.error(result.error.message); return; }
     if (result.redirected) return;
     navigate({ to: "/dashboard", replace: true });
   }

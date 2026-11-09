@@ -155,7 +155,7 @@ function Einsicht() {
   );
 }
 
-function Info({ label, value }: { label: string; value?: string | null }) {
+function Info({ label, value }: { label: string; value?: string | null | undefined }) {
   return (
     <div>
       <div className="text-xs text-ink/60">{label}</div>
