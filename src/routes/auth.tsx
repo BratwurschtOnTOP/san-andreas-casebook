@@ -113,10 +113,14 @@ function AuthPage() {
           ) : (
             <>
               <div className="grid gap-2">
-                <Button type="button" className="google-btn h-10 w-full" onClick={() => oauth("google")}>
+                <button
+                  type="button"
+                  className="google-btn inline-flex h-10 w-full items-center justify-center gap-[10px] rounded-md px-3 text-sm font-medium transition-colors"
+                  onClick={() => oauth("google")}
+                >
                   <GoogleLogo />
                   Continue with Google
-                </Button>
+                </button>
                 <button type="button" className="lovable-auth-button w-full" onClick={() => oauth("lovable")}>
                   Continue with Lovable
                 </button>
