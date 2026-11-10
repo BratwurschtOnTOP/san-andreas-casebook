@@ -67,7 +67,7 @@ export function FamilyDocument({ data }: { data: DocData }) {
     <article className="paper-sheet print-area mx-auto max-w-3xl rounded-sm px-10 py-12 md:px-14">
       <header className="flex items-start justify-between border-b-2 border-gold pb-5">
         <div>
-          <div className="eyebrow">Rechtsanwaltskammer San Andreas</div>
+          <div className="eyebrow">Alles oder nichts</div>
           <div className="text-xs text-ink/60 mt-1">Department of Justice · Los Santos City</div>
         </div>
         <Scale className="h-8 w-8 text-gold" />
