@@ -88,7 +88,7 @@ export function matchesParagraph(paragraph: string, query: string): boolean {
   const p = normParagraph(paragraph);
   if (!p.startsWith(q)) return false;
   const next = p.charAt(q.length);
-  return next === "" || !/\d/.test(next) || /\d/.test(q.charAt(q.length - 1)) === false;
+  return next === "" || !/\d/.test(next);
 }
 
 export function matchesSearch(item: LawParagraph, query: string): boolean {
