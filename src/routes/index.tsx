@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
         name: "description",
         content: "Dokumentiere Mandate, berechne Gebühren nach §4 RAVO und erstelle Familienlizenz-Anträge für San Andreas.",
       },
-      { property: "og:title", content: "Kanzleiakte – Leistungsdokumentation nach RAVO" },
+      { property: "og:title", content: "Alles oder nichts – Kanzleiakte San Andreas" },
       {
         property: "og:description",
         content: "Dokumentiere Mandate, berechne Gebühren nach §4 RAVO und erstelle Familienlizenz-Anträge für San Andreas.",
@@ -40,7 +40,7 @@ function Index() {
           </div>
           <div>
             <div className="font-display text-2xl font-semibold leading-none">Kanzleiakte</div>
-            <div className="eyebrow mt-1">Rechtsanwaltskammer San Andreas</div>
+            <div className="eyebrow mt-1">Alles oder nichts</div>
           </div>
         </div>
 
@@ -50,7 +50,7 @@ function Index() {
             Jedes Mandat. <span className="italic text-bordeaux">Lückenlos</span> dokumentiert.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-md">
-            Die Akte für Rechts- und Organisationsanwälte in Los Santos – nachvollziehbar, gebührenkonform und jederzeit einsichtsbereit.
+            Die gemeinsame Kanzleiakte für Rechts- und Organisationsanwälte in Los Santos – nachvollziehbar, gebührenkonform und jederzeit einsichtsbereit.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="gold">
