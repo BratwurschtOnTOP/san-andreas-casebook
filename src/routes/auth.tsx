@@ -96,7 +96,7 @@ function AuthPage() {
             <Scale className="h-6 w-6" />
           </div>
           <div className="font-display text-3xl font-semibold">Kanzleiakte</div>
-          <div className="eyebrow">Rechtsanwaltskammer San Andreas</div>
+          <div className="eyebrow">Alles oder nichts</div>
         </Link>
 
         <div className="paper-sheet rounded-lg p-6 md:p-8">
