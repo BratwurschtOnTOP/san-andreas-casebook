@@ -80,7 +80,7 @@ export type Database = {
           created_at: string
           family_name: string
           fee: number
-          firm_id: string | null
+          firm_id: string
           house_number: string
           id: string
           lawyer_name: string
@@ -102,7 +102,7 @@ export type Database = {
           created_at?: string
           family_name: string
           fee?: number
-          firm_id?: string | null
+          firm_id?: string
           house_number: string
           id?: string
           lawyer_name: string
@@ -124,7 +124,7 @@ export type Database = {
           created_at?: string
           family_name?: string
           fee?: number
-          firm_id?: string | null
+          firm_id?: string
           house_number?: string
           id?: string
           lawyer_name?: string
@@ -292,7 +292,7 @@ export type Database = {
           duration_minutes: number | null
           family_application_id: string | null
           fee: number
-          firm_id: string | null
+          firm_id: string
           id: string
           max_fee: number
           owner_id: string
@@ -308,7 +308,7 @@ export type Database = {
           duration_minutes?: number | null
           family_application_id?: string | null
           fee?: number
-          firm_id?: string | null
+          firm_id?: string
           id?: string
           max_fee?: number
           owner_id?: string
@@ -324,7 +324,7 @@ export type Database = {
           duration_minutes?: number | null
           family_application_id?: string | null
           fee?: number
-          firm_id?: string | null
+          firm_id?: string
           id?: string
           max_fee?: number
           owner_id?: string
