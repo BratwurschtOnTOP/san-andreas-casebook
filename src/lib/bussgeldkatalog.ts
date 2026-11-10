@@ -1284,4 +1284,3 @@ export const EXCLUSIONS_MAP = [
   { p1: "btmg-4", p2: "btmg-5", text: "§4 (Besitz BtM) geht bei derselben Menge in §5 (Handel mit BtM) auf." },
 ];
 
-export * from "./strafrechner";
