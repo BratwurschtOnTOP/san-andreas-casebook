@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { BookOpenText, Calculator, FileSignature, LayoutDashboard, LogOut, Scale, ShieldCheck, UserRound } from "lucide-react";
+import { BookOpenText, Calculator, FileSignature, Gavel, LayoutDashboard, LogOut, Scale, ShieldCheck, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { profileQuery } from "@/lib/queries";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ const NAV = [
   { to: "/dashboard", label: "Übersicht", icon: LayoutDashboard },
   { to: "/leistungen", label: "Leistungen", icon: BookOpenText },
   { to: "/gebuehren", label: "Gebührenrechner", icon: Calculator },
+  { to: "/bussgeldkatalog", label: "Bußgeldkatalog", icon: Gavel },
   { to: "/familienlizenz", label: "Familienlizenz", icon: FileSignature },
   { to: "/einsicht", label: "14-Tage-Einsicht", icon: ShieldCheck },
   { to: "/profil", label: "Anwaltsprofil", icon: UserRound },
