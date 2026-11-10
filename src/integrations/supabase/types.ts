@@ -14,6 +14,62 @@ export type Database = {
   }
   public: {
     Tables: {
+      case_files: {
+        Row: {
+          case_number: string
+          client_name: string
+          created_at: string
+          created_by: string
+          firm_id: string
+          id: string
+          notes: string
+          offense_ids: string[]
+          third_repeat_52a: boolean
+          total_fine: number
+          total_wanteds: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          case_number?: string
+          client_name?: string
+          created_at?: string
+          created_by?: string
+          firm_id?: string
+          id?: string
+          notes?: string
+          offense_ids?: string[]
+          third_repeat_52a?: boolean
+          total_fine?: number
+          total_wanteds?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          case_number?: string
+          client_name?: string
+          created_at?: string
+          created_by?: string
+          firm_id?: string
+          id?: string
+          notes?: string
+          offense_ids?: string[]
+          third_repeat_52a?: boolean
+          total_fine?: number
+          total_wanteds?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_files_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "law_firms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       family_applications: {
         Row: {
           applicant_name: string
@@ -24,6 +80,7 @@ export type Database = {
           created_at: string
           family_name: string
           fee: number
+          firm_id: string | null
           house_number: string
           id: string
           lawyer_name: string
@@ -45,6 +102,7 @@ export type Database = {
           created_at?: string
           family_name: string
           fee?: number
+          firm_id?: string | null
           house_number: string
           id?: string
           lawyer_name: string
@@ -66,6 +124,7 @@ export type Database = {
           created_at?: string
           family_name?: string
           fee?: number
+          firm_id?: string | null
           house_number?: string
           id?: string
           lawyer_name?: string
@@ -76,6 +135,114 @@ export type Database = {
           owner_id?: string
           status?: Database["public"]["Enums"]["application_status"]
           sworn_statement?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_applications_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "law_firms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      firm_invitations: {
+        Row: {
+          accepted_at: string | null
+          accepted_by: string | null
+          created_at: string
+          email: string
+          expires_at: string
+          firm_id: string
+          id: string
+          invited_by: string
+          revoked_at: string | null
+          token_hash: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email: string
+          expires_at: string
+          firm_id: string
+          id?: string
+          invited_by: string
+          revoked_at?: string | null
+          token_hash: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_by?: string | null
+          created_at?: string
+          email?: string
+          expires_at?: string
+          firm_id?: string
+          id?: string
+          invited_by?: string
+          revoked_at?: string | null
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "firm_invitations_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "law_firms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      law_firm_members: {
+        Row: {
+          firm_id: string
+          joined_at: string
+          role: Database["public"]["Enums"]["firm_role"]
+          user_id: string
+        }
+        Insert: {
+          firm_id: string
+          joined_at?: string
+          role?: Database["public"]["Enums"]["firm_role"]
+          user_id: string
+        }
+        Update: {
+          firm_id?: string
+          joined_at?: string
+          role?: Database["public"]["Enums"]["firm_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "law_firm_members_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "law_firms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      law_firms: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
           updated_at?: string
         }
         Relationships: []
@@ -125,6 +292,7 @@ export type Database = {
           duration_minutes: number | null
           family_application_id: string | null
           fee: number
+          firm_id: string | null
           id: string
           max_fee: number
           owner_id: string
@@ -140,6 +308,7 @@ export type Database = {
           duration_minutes?: number | null
           family_application_id?: string | null
           fee?: number
+          firm_id?: string | null
           id?: string
           max_fee?: number
           owner_id?: string
@@ -155,6 +324,7 @@ export type Database = {
           duration_minutes?: number | null
           family_application_id?: string | null
           fee?: number
+          firm_id?: string | null
           id?: string
           max_fee?: number
           owner_id?: string
@@ -170,6 +340,13 @@ export type Database = {
             referencedRelation: "family_applications"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "services_firm_id_fkey"
+            columns: ["firm_id"]
+            isOneToOne: false
+            referencedRelation: "law_firms"
+            referencedColumns: ["id"]
+          },
         ]
       }
     }
@@ -177,6 +354,42 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_firm_invitation: { Args: { _token: string }; Returns: string }
+      create_firm_invitation: {
+        Args: { _email: string }
+        Returns: {
+          expires_at: string
+          invitation_id: string
+          token: string
+        }[]
+      }
+      current_firm_id: { Args: never; Returns: string }
+      ensure_personal_firm: { Args: { _user: string }; Returns: string }
+      firm_members: {
+        Args: never
+        Returns: {
+          full_name: string
+          is_self: boolean
+          joined_at: string
+          lawyer_type: Database["public"]["Enums"]["lawyer_type"]
+          role: Database["public"]["Enums"]["firm_role"]
+          user_id: string
+        }[]
+      }
+      get_invitation_preview: {
+        Args: { _token: string }
+        Returns: {
+          already_member: boolean
+          email: string
+          email_confirmed: boolean
+          email_matches: boolean
+          expires_at: string
+          firm_name: string
+          status: string
+        }[]
+      }
+      is_firm_member: { Args: { _firm: string }; Returns: boolean }
+      is_firm_owner: { Args: { _firm: string }; Returns: boolean }
       ravo_max_fee: {
         Args: {
           _minutes: number
@@ -184,9 +397,15 @@ export type Database = {
         }
         Returns: number
       }
+      remove_firm_member: { Args: { _user: string }; Returns: undefined }
+      revoke_firm_invitation: {
+        Args: { _invitation: string }
+        Returns: undefined
+      }
     }
     Enums: {
       application_status: "entwurf" | "eingereicht" | "genehmigt" | "abgelehnt"
+      firm_role: "owner" | "member"
       lawyer_type: "rechtsanwalt" | "orgaanwalt"
       service_type:
         | "beratung"
@@ -323,6 +542,7 @@ export const Constants = {
   public: {
     Enums: {
       application_status: ["entwurf", "eingereicht", "genehmigt", "abgelehnt"],
+      firm_role: ["owner", "member"],
       lawyer_type: ["rechtsanwalt", "orgaanwalt"],
       service_type: [
         "beratung",

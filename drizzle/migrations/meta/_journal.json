@@ -8,6 +8,13 @@
       "when": 1794244587111,
       "tag": "0000_kanzlei_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794269863927,
+      "tag": "0001_kanzlei_team_model",
+      "breakpoints": true
     }
   ]
 }
