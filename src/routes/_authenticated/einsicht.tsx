@@ -74,14 +74,14 @@ function Einsicht() {
       }
     >
       <p className="no-print mb-6 max-w-2xl text-sm text-muted-foreground">
-        Justizministerium, Rechtsanwaltskammer und Gouverneursbüro dürfen durch Beschluss Einsicht verlangen – dabei dürfen nur die letzten{" "}
+        Justizministerium und Gouverneursbüro dürfen durch Beschluss Einsicht verlangen – dabei dürfen nur die letzten{" "}
         {REVIEW_WINDOW_DAYS} Tage beachtet werden. Dieser Bericht enthält genau diesen Zeitraum.
       </p>
 
       <article className="paper-sheet print-area mx-auto max-w-5xl rounded-sm px-8 py-10 md:px-12">
         <header className="flex items-start justify-between border-b-2 border-gold pb-5">
           <div>
-            <div className="eyebrow">Rechtsanwaltskammer San Andreas</div>
+            <div className="eyebrow">Alles oder nichts</div>
             <h2 className="mt-2 font-display text-3xl font-bold">Dokumentation anwaltlicher Leistungen</h2>
             <p className="text-sm text-ink/70">
               gem. §3 RAVO · Zeitraum {format(since, "dd.MM.yyyy")} – {format(now, "dd.MM.yyyy")}
